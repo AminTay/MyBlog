@@ -31,13 +31,16 @@
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Users </a>
+                    <a class="nav-link active" href="{{route('admin.users.index')}}">Manage Users </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Manage Post </a>
+                    <a class="nav-link active" href="{{route('admin.posts.index')}}">Manage Post </a>
                 </li>
 
-                <li class="nav-item dropdown">
+                <li class="nav-item">
+                    <a class="nav-link active" href="{{route('admin.tags.index')}}">Manage Tags </a>
+                </li>
+                <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
                         {{ Auth::user()->name }}
