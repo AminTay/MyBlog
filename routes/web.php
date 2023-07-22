@@ -4,7 +4,9 @@ use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminUserController;
+use App\Http\Controllers\Author\AuthorPostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\Author\AuthorController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -40,5 +42,11 @@ Route::middleware(['auth', 'admin'])->name('admin.')->prefix('admin')->group(fun
     Route::resource('/tags', AdminTagController::class);
     Route::resource('/users', AdminUserController::class);
 
+});
+
+Route::middleware(['auth', 'author'])->name('author.')->prefix('author')->group(function () {
+
+    Route::get('/', [AuthorController::class, 'index'])->name('index');
+    Route::resource('/posts', AuthorPostController::class);
 });
 require __DIR__ . '/auth.php';

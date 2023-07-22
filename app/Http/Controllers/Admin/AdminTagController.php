@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class AdminTagController extends Controller
@@ -12,7 +13,8 @@ class AdminTagController extends Controller
      */
     public function index()
     {
-        return view('admin.tags.index');
+        $tags = Tag::all();
+        return view('admin.tags.index', compact('tags'));
     }
 
     /**

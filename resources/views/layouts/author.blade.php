@@ -30,19 +30,15 @@
                 <li class="nav-item">
                     <a class="nav-link active" aria-current="page" href="#">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.users.index')}}">Manage Users </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.posts.index')}}">Manage Post </a>
-                </li>
 
                 <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.tags.index')}}">Manage Tags </a>
+                    <a class="nav-link active" href="{{route('author.posts.index')}}">Manage Post </a>
                 </li>
+
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
+
                         {{ Auth::user()->name }}
                     </a>
                     <ul class="dropdown-menu">
@@ -76,7 +72,7 @@
     <div class="container fixed-bottom">
         <footer class="py-3 my-4">
             <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Homeee</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
                 <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
