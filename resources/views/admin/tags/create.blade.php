@@ -4,7 +4,7 @@
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
-                    Edit Tag
+                    Create Tag
                 </div>
             </div>
         </div>
@@ -18,16 +18,13 @@
         </a>
     </div>
     <div class="m-2 px-5 w-50 mx-auto">
-        <form action="{{route('admin.tags.update', $tag->id) }}" method="post">
+        <form action="{{route('admin.tags.store') }}" method="post">
             @csrf
-            @method('PUT')
             <div class="mb-3">
                 <label for="name" class="form-label text-center">Name </label>
-                <input type="text" class="form-control" id="name" name="name"
-                       value="{{$tag->name}}"
-                >
+                <input type="text" class="form-control" id="name" name="name">
             </div>
-            <button type="submit" class="btn btn-primary my-5 mx-auto d-block">Update tag</button>
+            <button type="submit" class="btn btn-primary my-5 mx-auto d-block">Create tag</button>
 
         </form>
 

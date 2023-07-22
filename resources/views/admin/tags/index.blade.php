@@ -30,58 +30,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.tags.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.tags.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.tags.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.tags.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.tags.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.tags.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
-
-        </tr>
+        @foreach($tags as $tag)
+            <tr>
+                <th scope="row">{{$tag->id}}</th>
+                <td>{{$tag->name}}</td>
+                <td>Otto</td>
+                <td>@mdo</td>
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="d-flex justify-content-center">
+                        <a href="{{ route('admin.tags.edit',$tag->id) }}" class="btn btn-primary me-2">Edit</a>
+                        <form method="POST" action="{{ route('admin.tags.destroy',$tag->id) }}"
+                              onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
 
         </tbody>
     </table>
