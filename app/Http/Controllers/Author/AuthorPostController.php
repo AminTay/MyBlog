@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Author;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\PostStoreRequest;
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class AuthorPostController extends Controller
@@ -15,7 +16,8 @@ class AuthorPostController extends Controller
     public function index()
     {
         $posts = Post::all();
-        return view('author.posts.index', compact('posts'));
+
+        return view('author.posts.index', compact('posts',));
     }
 
     /**
@@ -23,7 +25,8 @@ class AuthorPostController extends Controller
      */
     public function create()
     {
-        return view('author.posts.create');
+        $tags = Tag::all();
+        return view('author.posts.create', compact('tags'));
     }
 
     /**
@@ -31,8 +34,6 @@ class AuthorPostController extends Controller
      */
     public function store(PostStoreRequest $request)
     {
-
-
         $image = substr($request->file('image')->store('public/posts'), 7);
 
         Post::create([

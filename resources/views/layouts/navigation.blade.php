@@ -25,6 +25,14 @@
                         </x-nav-link>
                     </div>
                 @endif
+
+                @if(Auth::user()->rule == 'author')
+                    <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                        <x-nav-link :href="route('author.index')" :active="request()->routeIs('dashboard')">
+                            {{ __('Author') }}
+                        </x-nav-link>
+                    </div>
+                @endif
             </div>
 
             <!-- Settings Dropdown -->

@@ -46,6 +46,20 @@
                 ></textarea>
             </div>
 
+            <div class="form-group my-5">
+                <label for="description">Tags</label>
+                <br>
+                <select multiple
+                        class="form-select"
+                >
+                    @foreach($tags as $tag)
+                        <option value="{{$tag->id}}">{{$tag->name}}</option>
+                    @endforeach
+
+                </select>
+            </div>
+
+
             <button type="submit" class="btn btn-primary my-5 mx-auto d-block">Create post</button>
 
             <br>
