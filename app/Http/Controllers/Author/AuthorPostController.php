@@ -10,12 +10,22 @@ use Illuminate\Http\Request;
 
 class AuthorPostController extends Controller
 {
+
+
+    private function checkPostOwner(Post $post)
+    {
+        if ($post->user_id != auth()->user()->id) {
+            abort(403);
+        }
+
+    }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $posts = Post::all();
+        $posts = Post::where('user_id', auth()->user()->id)->get();
 
         return view('author.posts.index', compact('posts',));
     }
@@ -36,11 +46,16 @@ class AuthorPostController extends Controller
     {
         $image = substr($request->file('image')->store('public/posts'), 7);
 
-        Post::create([
+        $post = Post::create([
             'title' => $request->title,
             'description' => $request->description,
-            'image' => $image
+            'image' => $image,
+            'user_id' => auth()->user()->id,
         ]);
+
+        if ($request->has('tags')) {
+            $post->tags()->attach($request->tags);
+        }
 
         return to_route('author.posts.index')->with('success', 'Post created successfully!');
     }
@@ -58,14 +73,19 @@ class AuthorPostController extends Controller
      */
     public function edit(Post $post)
     {
-        return view('author.posts.edit', compact('post'));
+        $this->checkPostOwner($post);
+
+        $tags = Tag::all();
+        return view('author.posts.edit', compact('post', 'tags'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(PostStoreRequest $request, Post $post)
+    public function update(Request $request, Post $post)
     {
+
+        $this->checkPostOwner($post);
 
 //        dd($request);
         $request->validate([
@@ -84,6 +104,11 @@ class AuthorPostController extends Controller
             'image' => $image,
         ]);
 
+        if ($request->has('tags')) {
+            $post->tags()->sync($request->tags);
+        }
+
+
         return to_route('author.posts.index')->with('success', 'Post updated successfully!');
     }
 
@@ -92,6 +117,9 @@ class AuthorPostController extends Controller
      */
     public function destroy(Post $post)
     {
+        $this->checkPostOwner($post);
+
+        $post->tags()->detach();
         $post->delete();
         return to_route('author.posts.index')->with('warning', 'Post deleted!');
     }

@@ -60,9 +60,11 @@ class AdminPostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
-        //
+        $post->tags()->detach();
+        $post->delete();
+        return to_route('admin.posts.index')->with('warning', 'Post deleted!');
     }
 }
 

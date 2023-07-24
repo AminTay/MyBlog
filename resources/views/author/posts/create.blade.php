@@ -9,6 +9,16 @@
             </div>
         </div>
     </div>
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
 
     <div class="d-flex justify-content-end p-2 mx-5">
         <a
@@ -47,11 +57,13 @@
             </div>
 
             <div class="form-group my-5">
-                <label for="description">Tags</label>
+                <label for="tags">Tags</label>
                 <br>
                 <select multiple
                         class="form-select"
-                >
+                        id="tags"
+                        name="tags[]">
+
                     @foreach($tags as $tag)
                         <option value="{{$tag->id}}">{{$tag->name}}</option>
                     @endforeach
@@ -59,16 +71,8 @@
                 </select>
             </div>
 
-
             <button type="submit" class="btn btn-primary my-5 mx-auto d-block">Create post</button>
-
-            <br>
-            <br>
-            <br>
-            <br>
         </form>
-
     </div>
-
 
 </x-author-layout>

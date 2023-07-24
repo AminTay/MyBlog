@@ -1,3 +1,4 @@
+@php use App\Models\User; @endphp
 <x-admin-layout>
 
     <div class="py-12 text-center mb-5 mt-5 w-50 mx-auto">
@@ -22,65 +23,41 @@
         <thead>
         <tr>
             <th scope="col">id</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Title</th>
+            <th scope="col">Author</th>
+            <th scope="col">Views</th>
+            <th scope="col">Image</th>
+
             <th scope="col">Options</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.posts.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.posts.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.posts.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.posts.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
-        </tr>
-        <tr>
-            <th scope="row">3</th>
-            <td>Larry the Bird</td>
-            <td>@twitter</td>
-            <td>@twitter</td>
-            <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                <div class="d-flex justify-content-center">
-                    <a href="{{ route('admin.posts.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                    <form method="POST" action="{{ route('admin.posts.edit',1) }}"
-                          onsubmit="return confirm('Are you sure?');">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </td>
+        @foreach($posts as $post)
+            <tr>
+                <th scope="row">{{$post->id}}</th>
+                {{--                <td><a href="{{route('showPost', $post)}}">{{$post->title}}</a></td>--}}
+                <td>{{$post->title}}</td>
 
-        </tr>
+                <td>{{User::find($post->user_id)->name}}</td>
+                <td>{{(int)$post->views}}</td>
+                <td class="w-50"><img
+                        class="img-thumbnail  w-25"
+                        src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'  }}"
+                    >
+                </td>
+                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                    <div class="d-flex justify-content-center">
+
+                        <form method="POST" action="{{ route('admin.posts.destroy',$post->id) }}"
+                              onsubmit="return confirm('Are you sure?');">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+        @endforeach
 
         </tbody>
     </table>

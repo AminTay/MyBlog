@@ -28,3 +28,4 @@
 // todo: search in post's title, description, tag
 // todo: view all post with a tag
 
+// todo image preview on post edit and post create

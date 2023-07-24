@@ -59,14 +59,12 @@ class AdminTagController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(TagStoreRequest $request, Tag $tag)
+    public function update(Request $request, Tag $tag)
     {
-
 
         $request->validate([
             'name' => 'required',
         ]);
-
 
         $tag->update([
             'name' => $request->name,
@@ -80,6 +78,7 @@ class AdminTagController extends Controller
      */
     public function destroy(Tag $tag)
     {
+        $tag->posts()->detach();
         $tag->delete();
         return to_route('admin.tags.index')->with('warning', 'Tag deleted!');
     }

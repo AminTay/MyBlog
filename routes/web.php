@@ -49,4 +49,6 @@ Route::middleware(['auth', 'author'])->name('author.')->prefix('author')->group(
     Route::get('/', [AuthorController::class, 'index'])->name('index');
     Route::resource('/posts', AuthorPostController::class);
 });
+
+//Route::get('/showPost',[])
 require __DIR__ . '/auth.php';

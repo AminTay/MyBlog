@@ -10,6 +10,16 @@
         </div>
     </div>
 
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
     <div class="d-flex justify-content-end p-2 mx-5">
         <a
             href="{{route('author.posts.index')}}"
@@ -34,7 +44,7 @@
 
                 <div class="w-50"><img
                         class="img-thumbnail  w-25"
-                        src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'  }}"
+                        src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'}}"
                     >
                 </div>
                 <label for="image"
@@ -56,12 +66,29 @@
                 >{{$post->description}}</textarea>
             </div>
 
+            <div class="form-group my-5">
+                <label for="tags">Tags</label>
+                <br>
+                <select multiple
+                        class="form-select"
+                        id="tags"
+                        name="tags[]">
+
+                    @foreach($tags as $tag)
+                        <option
+                            value="{{$tag->id}}"
+                            @selected($post->tags->contains($tag))
+                        >
+                            {{$tag->name}}
+                        </option>
+                    @endforeach
+
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary my-5 mx-auto d-block">Update post</button>
 
-            <br>
-            <br>
-            <br>
-            <br>
+
         </form>
 
     </div>

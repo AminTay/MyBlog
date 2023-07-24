@@ -16,6 +16,7 @@ return new class extends Migration {
             $table->text('description');
             $table->string('image');
             $table->decimal('views', 10, 2)->default(0);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
         });
     }

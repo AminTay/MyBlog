@@ -23,9 +23,9 @@
         <thead>
         <tr>
             <th scope="col">id</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
+            <th scope="col">Name</th>
+            <th scope="col">Posts Number</th>
+
             <th scope="col">Options</th>
         </tr>
         </thead>
@@ -34,8 +34,8 @@
             <tr>
                 <th scope="row">{{$tag->id}}</th>
                 <td>{{$tag->name}}</td>
-                <td>Otto</td>
-                <td>@mdo</td>
+                <td>{{count($tag->posts)}}</td>
+
                 <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
                     <div class="d-flex justify-content-center">
                         <a href="{{ route('admin.tags.edit',$tag->id) }}" class="btn btn-primary me-2">Edit</a>

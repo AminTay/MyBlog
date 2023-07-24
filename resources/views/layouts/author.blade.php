@@ -17,7 +17,7 @@
     <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
-<body class="font-sans antialiased">
+<body class="font-sans antialiased d-flex flex-column min-vh-100">
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
     <div class="container-fluid">
         <a class="navbar-brand" href="/">MyBlog</a>
@@ -61,27 +61,28 @@
         </div>
     </div>
 </nav>
-<div class="min-h-screen bg-gray-100 dark:bg-gray-900">
 
-
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex-grow-1">
     <!-- Page Content -->
     <main class="font-family-sans-serif">
         {{ $slot }}
     </main>
-
-    <div class="container ">
-        <footer class="py-3 my-4">
-            <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
-                <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
-            </ul>
-            <p class="text-center text-muted">&copy; 2023 MyBlog, Inc</p>
-        </footer>
-    </div>
 </div>
+
+
+<div class="container footer mt-auto pt-5">
+    <footer class="py-3 my-4">
+        <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Home</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Features</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">Pricing</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">FAQs</a></li>
+            <li class="nav-item"><a href="#" class="nav-link px-2 text-muted">About</a></li>
+        </ul>
+        <p class="text-center text-muted">&copy; 2023 MyBlog, Inc</p>
+    </footer>
+</div>
+
 </body>
 </html>
 
