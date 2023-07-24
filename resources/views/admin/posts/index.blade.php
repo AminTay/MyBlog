@@ -35,8 +35,9 @@
         @foreach($posts as $post)
             <tr>
                 <th scope="row">{{$post->id}}</th>
-                {{--                <td><a href="{{route('showPost', $post)}}">{{$post->title}}</a></td>--}}
-                <td>{{$post->title}}</td>
+
+                <td><a href="{{route('showPost', $post->id)}}">{{$post->title}}</a></td>
+
 
                 <td>{{User::find($post->user_id)->name}}</td>
                 <td>{{(int)$post->views}}</td>

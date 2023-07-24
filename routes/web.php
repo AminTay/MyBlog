@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Author\AuthorPostController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Author\AuthorController;
 use Illuminate\Support\Facades\Route;
@@ -50,5 +51,5 @@ Route::middleware(['auth', 'author'])->name('author.')->prefix('author')->group(
     Route::resource('/posts', AuthorPostController::class);
 });
 
-//Route::get('/showPost',[])
+Route::get('/showPost/{post}', [HomeController::class, 'showPost'])->name('showPost');
 require __DIR__ . '/auth.php';
