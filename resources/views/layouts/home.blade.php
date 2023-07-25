@@ -23,17 +23,79 @@
 
 <body class="font-sans antialiased d-flex flex-column min-vh-100">
 
-<nav class="navbar bg-body-tertiary">
-    <div class="container-fluid">
-        <a class="navbar-brand">MyBlog</a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
+<nav class="navbar bg-body-tertiary container w-100">
+
+    <div class="container-fluid ">
+        <a href="/" class="navbar-brand">MyBlog</a>
+        <div class="d-flex justify-content-between w-50">
+
+            <div class="align-items-center my-auto text-center d-flex">
+                @if (Route::has('login'))
+                    <div class="sm:fixed sm:top-0 sm:right-0 p-6 text-right z-10">
+                        @auth
+
+                            <div class="d-flex">
+
+                                <div class="mx-1">
+                                    @if(auth()->user()->rule == 'superAdmin')
+                                        <div class="btn btn-success btn-sm">
+                                            <a href="{{route('admin.index') }}"
+                                               class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-decoration-none text-black">Admin
+                                                Panel</a>
+                                        </div>
+                                    @endif
+                                    @if(auth()->user()->rule == 'author')
+                                        <div class="btn btn-success btn-sm">
+                                            <a href="{{route('author.index') }}"
+                                               class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-decoration-none text-black">Author
+                                                Panel</a>
+                                        </div>
+                                    @endif
+                                </div>
+                                <div class="mr-1">
+                                    <form method="POST" action="{{route('logout')}}">
+                                        @csrf
+                                        <div class="btn btn-danger btn-sm">
+                                            <a class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-decoration-none text-black"
+                                               href="{{route('logout')}}" onclick="event.preventDefault();
+                                                this.closest('form').submit();">Log Out</a>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+
+                        @else
+                            <div class="">
+                                <div class="btn btn-primary">
+                                    <a href="{{ route('login') }}"
+                                       class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-decoration-none text-black">Log
+                                        in</a>
+                                </div>
+                                <div class="btn btn-success">
+                                    @if (Route::has('register'))
+                                        <a href="{{ route('register') }}"
+                                           class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500 text-decoration-none text-black">Register</a>
+                                    @endif
+                                </div>
+                            </div>
+                        @endauth
+                    </div>
+                @endif
+            </div>
+            <form method="post" action="{{route('search')}}"
+                  class="d-flex">
+                @csrf
+                <input
+                    name="search" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
+            </form>
+        </div>
     </div>
+
 </nav>
 
-<div class="min-h-screen bg-light">
+<div class="min-h-screen">
 
     <!-- Page Content -->
     <main class="font-family-sans-serif flex-grow-1">

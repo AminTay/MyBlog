@@ -9,6 +9,7 @@ use App\Http\Controllers\Author\AuthorTagsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Author\AuthorController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -23,7 +24,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+
+    $posts = Post::orderBy('views', 'desc')
+        ->take(3)
+        ->get();
+    return view('welcome', compact('posts'));
 });
 
 Route::get('/dashboard', function () {
@@ -54,4 +59,7 @@ Route::middleware(['auth', 'author'])->name('author.')->prefix('author')->group(
 });
 
 Route::get('/showPost/{post}', [HomeController::class, 'showPost'])->name('showPost');
+Route::get('/showTag/{tag}', [HomeController::class, 'showTag'])->name('showTag');
+Route::post('/search', [HomeController::class, 'search'])->name('search');
+
 require __DIR__ . '/auth.php';

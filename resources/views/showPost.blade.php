@@ -15,6 +15,7 @@
 
                         <h2 class="mb-1">{{$post->title}}</h2>
                         <h4 class="mb-1">By {{User::find($post->user_id)->name}}</h4>
+                        <h4 class="mb-1">Views: {{(int) $post->views}}</h4>
                         <div class="mb-1 text-muted">{{$post->created_at->format('l, F j')}}</div>
 
                         <div class="container mt-3  text-center">

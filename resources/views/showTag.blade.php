@@ -1,14 +1,9 @@
 <?php use App\Models\User ?>
 <x-home-layout>
 
-    <div class="w-75 mx-auto d-flex justify-content-center align-items-center mt-5 bg-white rounded">
-        <img
-            class="w-100 rounded"
-            src="storage/blog3.jpg">
-    </div>
 
     <div class="text-center mt-5">
-        <h1 class="">Top Posts </h1>
+        <h1 class="">All Posts with tag <strong>{{$tag->name}} </strong></h1>
         <div class="container">
             <div class="">
 
@@ -17,14 +12,15 @@
 
 
                         <div class="w-25 ">
-                            <h3 class="mb-1"><a class="text-decoration-none text-dark" href="{{route('showPost', $post->id)}}"> {{$post->title}}</a></h3>
+                            <h3 class="mb-1"><a class="text-decoration-none text-dark"
+                                                href="{{route('showPost', $post->id)}}"> {{$post->title}}</a></h3>
                             <h5 class="mb-1">By {{User::find($post->user_id)->name}}</h5>
 
                             <div class="container mt-3  text-center">
                                 <div class="row">
                                     @foreach($post->tags as $tag)
                                         <div class="mt-1">
-                                            <a href="/"
+                                            <a href="{{route('showTag', $tag->id)}}"
                                                class="text-decoration-none text-dark">
                                                 <div class="bg-success rounded-pill">#{{$tag->name}}</div>
                                             </a>

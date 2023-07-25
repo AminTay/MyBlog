@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -10,8 +11,37 @@ class HomeController extends Controller
 
     public function showPost(Post $post)
     {
+        $post->update([
+                'views' => ((int)$post->views + 1)]
+        );
+
 
         return view('showPost', compact('post'));
+    }
+
+    public function showTag(Tag $tag)
+    {
+
+        $posts = Post::whereHas('tags', function ($query) use ($tag) {
+            $query->where('id', $tag->id);
+        })->get();
+        return view('showTag', compact('posts', 'tag'));
+    }
+
+    public function search(Request $request)
+    {
+
+        $keyword = $request->search;
+
+        $posts = Post::whereHas('tags', function ($query) use ($keyword) {
+            $query->where('title', 'like', '%' . $keyword . '%');
+        })->orwhere(function ($query) use ($keyword) {
+            $query->where('title', 'like', '%' . $keyword . '%')
+                ->orWhere('description', 'like', '%' . $keyword . '%');
+        })
+            ->get();
+
+        return view('search', compact('posts', 'keyword'));
     }
 
     /**

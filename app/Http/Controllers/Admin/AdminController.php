@@ -9,6 +9,6 @@ class AdminController extends Controller
 {
     public function index()
     {
-        return view('admin.index');
+        return to_route('admin.posts.index');
     }
 }

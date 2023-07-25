@@ -3,7 +3,7 @@
 
 
     <div class="text-center mt-5">
-        <h1 class="">All Posts with tag <strong>{{$tag->name}} </strong></h1>
+        <h1 class="">Search results for <strong>{{$keyword}} </strong></h1>
         <div class="container">
             <div class="">
 

@@ -30,19 +30,20 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
+
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="{{route('admin.index')}}">Home</a>
+                    <a class="nav-link active" href="{{route('admin.posts.index')}}">Manage Posts </a>
                 </li>
+
                 <li class="nav-item">
                     <a class="nav-link active" href="{{route('admin.users.index')}}">Manage Users </a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link active" href="{{route('admin.posts.index')}}">Manage Post </a>
-                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link active" href="{{route('admin.tags.index')}}">Manage Tags </a>
                 </li>
+
                 <li class="nav-item dropdown active">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
