@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Author;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagStoreRequest;
+use App\Models\Tag;
 use Illuminate\Http\Request;
 
 class AuthorTagsController extends Controller
@@ -12,7 +14,8 @@ class AuthorTagsController extends Controller
      */
     public function index()
     {
-        //
+        $tags = Tag::all();
+        return view('author.tags.index', compact('tags'));
     }
 
     /**
@@ -20,16 +23,20 @@ class AuthorTagsController extends Controller
      */
     public function create()
     {
-        //
+        return view('author.tags.create');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TagStoreRequest $request)
     {
-        //
+        Tag::create([
+            'name' => $request->name,
+        ]);
+        return to_route('author.tags.index')->with('success', 'Tag created successfully!');
     }
+
 
     /**
      * Display the specified resource.

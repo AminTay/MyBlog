@@ -11,56 +11,54 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-end p-2 mx-5">
-        <a
-            href="{{route('admin.posts.create')}}"
-            class="px-4 py-2 text-light btn btn-success text-decoration-none rounded">
-            Create Post
-        </a>
-    </div>
 
-    <table class="table mt-3 text-center align-middle">
-        <thead>
-        <tr>
-            <th scope="col">id</th>
-            <th scope="col">Title</th>
-            <th scope="col">Author</th>
-            <th scope="col">Views</th>
-            <th scope="col">Image</th>
-
-            <th scope="col">Options</th>
-        </tr>
-        </thead>
-        <tbody>
-        @foreach($posts as $post)
+    <div class="px-3 mt-5">
+        <table class="table mt-3 text-center align-middle ">
+            <thead>
             <tr>
-                <th scope="row">{{$post->id}}</th>
+                <th scope="col">id</th>
+                <th scope="col">Title</th>
+                <th scope="col">Author</th>
+                <th scope="col">Views</th>
+                <th scope="col">Image</th>
 
-                <td><a href="{{route('showPost', $post->id)}}">{{$post->title}}</a></td>
-
-
-                <td>{{User::find($post->user_id)->name}}</td>
-                <td>{{(int)$post->views}}</td>
-                <td class="w-50"><img
-                        class="img-thumbnail  w-25"
-                        src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'  }}"
-                    >
-                </td>
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div class="d-flex justify-content-center">
-
-                        <form method="POST" action="{{ route('admin.posts.destroy',$post->id) }}"
-                              onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
-                </td>
+                <th scope="col">Options</th>
             </tr>
-        @endforeach
+            </thead>
+            <tbody>
+            @foreach($posts as $post)
+                <tr>
+                    <th scope="row">{{$post->id}}</th>
 
-        </tbody>
-    </table>
+                    <td><a
+                            class="text-decoration-none text-black"
+                            href="{{route('showPost', $post->id)}}">{{$post->title}}</a></td>
+
+
+                    <td>{{User::find($post->user_id)->name}}</td>
+                    <td>{{(int)$post->views}}</td>
+                    <td class=""><img
+                            class="img-thumbnail "
+                            style="width: 12rem"
+                            src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'  }}"
+                        >
+                    </td>
+                    <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                        <div class="d-flex justify-content-center">
+
+                            <form method="POST" action="{{ route('admin.posts.destroy',$post->id) }}"
+                                  onsubmit="return confirm('Are you sure?');">
+                                @csrf
+                                @method('DELETE')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            @endforeach
+
+            </tbody>
+        </table>
+    </div>
 
 </x-admin-layout>

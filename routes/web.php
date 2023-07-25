@@ -5,6 +5,7 @@ use App\Http\Controllers\Admin\AdminPostController;
 use App\Http\Controllers\Admin\AdminTagController;
 use App\Http\Controllers\Admin\AdminUserController;
 use App\Http\Controllers\Author\AuthorPostController;
+use App\Http\Controllers\Author\AuthorTagsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Author\AuthorController;
@@ -49,6 +50,7 @@ Route::middleware(['auth', 'author'])->name('author.')->prefix('author')->group(
 
     Route::get('/', [AuthorController::class, 'index'])->name('index');
     Route::resource('/posts', AuthorPostController::class);
+    Route::resource('/tags', AuthorTagsController::class);
 });
 
 Route::get('/showPost/{post}', [HomeController::class, 'showPost'])->name('showPost');

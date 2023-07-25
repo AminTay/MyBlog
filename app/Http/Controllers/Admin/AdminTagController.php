@@ -33,8 +33,6 @@ class AdminTagController extends Controller
     {
         Tag::create([
             'name' => $request->name,
-
-
         ]);
 
         return to_route('admin.tags.index')->with('success', 'Tag created successfully!');

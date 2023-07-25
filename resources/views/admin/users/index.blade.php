@@ -1,3 +1,4 @@
+@php use App\Enums\Rule; @endphp
 <x-admin-layout>
 
     <div class="py-12 text-center mb-5 mt-5 w-50 mx-auto">
@@ -11,23 +12,16 @@
     </div>
 
 
-    <div class="d-flex justify-content-end p-2 mx-5">
-        <a
-            href="{{route('admin.users.create')}}"
-            class="px-4 py-2 text-light btn btn-success text-decoration-none rounded">
-            Create User
-        </a>
-    </div>
-
     <table class="table mt-5 text-center align-middle">
         <thead>
         <tr>
             <th scope="col">id</th>
             <th scope="col">Name</th>
             <th scope="col">Email</th>
+            <th scope="col">Post Numbers</th>
             <th scope="col">Rule</th>
-            <th scope="col">Post Number</th>
-            <th scope="col">Options</th>
+
+
         </tr>
         </thead>
         <tbody>
@@ -36,25 +30,37 @@
                 <th scope="row">{{$user->id}}</th>
                 <td>{{$user->name}}</td>
                 <td>{{$user->email}}</td>
-                <td>{{$user->rule}}</td>
-                <td>{{ $user->rule == 'author' ? count($user->posts) : 'NaN'}}</td>
 
-                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    <div class="d-flex justify-content-center">
-                        <a href="{{ route('admin.tags.edit',1) }}" class="btn btn-primary me-2">Edit</a>
-                        <form method="POST" action="{{ route('admin.tags.edit',1) }}"
-                              onsubmit="return confirm('Are you sure?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger">Delete</button>
-                        </form>
-                    </div>
+                <td>{{ $user->rule == 'author' ? count($user->posts) : 'NaN'}}</td>
+                <td>
+                    <form action="{{ route('admin.users.update', $user->id) }}" method="post">
+                        @csrf
+                        @method('PUT')
+                        <select name="rule" onchange="this.form.submit()">
+                            @foreach(Rule::cases() as $rule)
+                                <option
+                                    value="{{$rule->value}}" @selected($rule->value == $user->rule)>{{$rule->name}}
+                                </option>
+                            @endforeach
+
+                        </select>
+                    </form>
                 </td>
 
-            </tr>
+            {{--                <td class="py-4 px-6 text-sm font-medium text-gray-900 whitespace-nowrap dark:text-white">--}}
+            {{--                    <div class="d-flex justify-content-center">--}}
+
+            {{--                        <form method="POST" action="{{ route('admin.users.destroy',$user->id) }}"--}}
+            {{--                              onsubmit="return confirm('Are you sure?');">--}}
+            {{--                            @csrf--}}
+            {{--                            @method('DELETE')--}}
+            {{--                            <button type="submit" class="btn btn-danger">Delete</button>--}}
+            {{--                        </form>--}}
+            {{--                    </div>--}}
+            {{--                </td>--}}
+
+            {{--            </tr>--}}
         @endforeach
-
-
         </tbody>
     </table>
 

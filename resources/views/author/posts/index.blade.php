@@ -1,4 +1,3 @@
-
 <x-author-layout>
 
     <div class="py-12 text-center mb-5 mt-5 w-50 mx-auto">
@@ -23,8 +22,9 @@
             <thead>
             <tr>
                 <th scope="col">id</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
+                <th scope="col">Title</th>
+                <th scope="col">Views</th>
+                <th scope="col">Image</th>
 
                 <th scope="col">Options</th>
             </tr>
@@ -33,11 +33,17 @@
             @foreach($posts as $post)
                 <tr>
                     <th scope="row">{{$post->id}}</th>
-                    <td>{{$post->title}} </td>
+                    <td><a
+                            class="text-decoration-none text-black"
+                            href="{{route('showPost', $post->id)}}">{{$post->title}}</a>
                     </td>
 
-                    <td class="w-50"><img
-                            class="img-thumbnail  w-25"
+                    <td>
+                        {{(int) $post->views}}
+                    </td>
+                    <td class=""><img
+                            class="img-thumbnail "
+                            style="width: 12rem"
                             src="/storage/{{!empty($post->image)?$post->image : 'noImage.jpg'  }}"
                         >
                     </td>
@@ -57,7 +63,6 @@
             @endforeach
 
             </tbody>
-
         </table>
     </div>
 </x-author-layout>

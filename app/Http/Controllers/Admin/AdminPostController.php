@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Post;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class AdminPostController extends Controller
@@ -46,15 +47,16 @@ class AdminPostController extends Controller
      */
     public function edit(string $id)
     {
+
         return view('admin.posts.edit');
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Post $post)
     {
-        //
+
     }
 
     /**

@@ -6,7 +6,7 @@
         </h2>
     </x-slot>
 
-    <div class="container mt-5 border rounded p-5 w-75">
+    <div class="container mt-5 border rounded p-3 w-75">
         <div class="row mb-2">
             <div class="col-sm-6 d-flex flex-column">
                 <div
@@ -21,7 +21,10 @@
                             <div class="row">
                                 @foreach($post->tags as $tag)
                                     <div class="col-12 col-sm-6 col-md-4 my-1 p-2">
-                                        <div class="bg-success rounded-pill">#{{$tag->name}}</div>
+                                        <a href="/"
+                                           class="text-decoration-none text-dark">
+                                            <div class="bg-success rounded-pill">#{{$tag->name}}</div>
+                                        </a>
                                     </div>
                                 @endforeach
                             </div>
@@ -43,7 +46,7 @@
         </div>
         <div class="row mb-2 border rounded p-2">
             <h3 class="font-weight-bold text-primary text-muted"
-                style="font-size: 24px; line-height: 1.5; font-family: sans-serif">
+                style="font-size: 24px; line-height: 1.5; font-family: sans-serif; white-space: pre-line;">
                 {{$post->description}}
             </h3>
         </div>
@@ -51,3 +54,4 @@
     </div>
 
 </x-home-layout>
+
